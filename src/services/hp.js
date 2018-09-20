@@ -10,21 +10,29 @@ export function hitDieAverage(hitDie, roundUp = false) {
 }
 
 
-export function totalFixedHP(levels, hitDie, conMod, isPlayer = false) {
+export function totalFixedHPPlayer(levels, hitDie, conMod) {
   if (levels < 1) {
     return 0;
   }
   let total = 0;
   for (let level = 1; level <= levels; level++) {
-    if (isPlayer) {
-      if (level === 1) {
-        total += hitDie + conMod;
-      } else {
-        total += hitDieAverage(hitDie, true) + conMod;
-      }
+    if (level === 1) {
+      total += hitDie + conMod;
     } else {
-      total += (hitDie + 1) / 2 + conMod;
+      total += hitDieAverage(hitDie, true) + conMod;
     }
+  }
+  return Math.trunc(total);
+}
+
+
+export function totalFixedHP(levels, hitDie, conMod) {
+  if (levels < 1) {
+    return 0;
+  }
+  let total = 0;
+  for (let level = 1; level <= levels; level++) {
+    total += (hitDie + 1) / 2 + conMod;
   }
   return Math.trunc(total);
 }
